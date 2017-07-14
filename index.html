@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		body{
+			background: black;
+		}
+		section{
+			width: 1078px;
+			height: 578px;
+			border: 1px solid #000;
+			margin: 30px auto;
+			perspective:1600px;
+		}
+		div{
+			width: 1078px;
+			height: 578px;
+			position: relative;
+ 			transform-style:preserve-3d;
+			transform:rotateX(20deg);
+		}
+		img{
+			position: absolute;
+			width: 58px;
+			height: 58px;
+			left: 500px;
+			top: 250px;
+		}
+	</style>
+</head>
+<body>
+	<section>
+		<div>
+			
+		</div>
+	</section>
+
+	<script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+	<script type="text/javascript">
+		// 写好每层的图片张数
+		var arr = [20,16,12,8,1];
+		// 循环每层
+		for(var m = 0 ; m < 4 ; m++){
+			// 这层的图片数量
+			var cengzhangshu = arr[m];
+			// rotateX的间隔
+			var xdu = 90 / 4;
+			// y的间隔
+			var ydu = 360 / cengzhangshu;
+			// 创建图片
+			for(var i = 0 ; i < cengzhangshu ; i++){
+				$("<img src=images/mingxing/" + (m * 7 + i) + ".jpg />").appendTo("div").css({
+					"transform" : "rotateY(" + (ydu * i)  + "deg) rotateX(" + (xdu * m) + "deg) translateZ(300px)"
+				});
+			}
+		}
+
+		// 循环每层
+		for(var m = 1 ; m <= 7 ; m++){
+			// 这层的图片数量
+			var cengzhangshu = arr[m];
+			// rotateX的间隔
+			var xdu = -90 / 4;
+			// y的间隔
+			var ydu = 360 / cengzhangshu;
+			// 创建图片
+			for(var i = 0 ; i < cengzhangshu ; i++){
+				$("<img src=images/mingxing/" + (m * 7 + i) + ".jpg />").appendTo("div").css({
+					"transform" : "rotateY(" + (ydu * i)  + "deg) rotateX(" + (xdu * m) + "deg) translateZ(300px)"
+				});
+			}
+		}
+
+		// 鼠标移动
+		// $("div").mousemove(function(event){
+		// 	var x = event.clientX - $("div").offset().left;
+		// 	var y = event.clientY - $("div").offset().top;
+
+		// 	$("div").css("transform" , "rotateX(" + y / 30 + "deg) rotateY(" + x / 30 + "deg)");
+		// });
+
+
+		var a = 0;
+		setInterval(function(){
+			a++;
+			$("div").css("transform" , "rotateY(" + a +"deg)");
+		},20);
+	</script>
+</body>
+</html>
